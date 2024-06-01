@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxce3esy8bvj6"]
+
+[ext_resource type="PackedScene" uid="uid://b365a65y34f6y" path="res://Entity/Entity.tscn" id="1_pohov"]
+
+[node name="Enemy" instance=ExtResource("1_pohov")]
+collision_layer = 2
+collision_mask = 2
+SPEED = 2000.0
+color = Color(0.713726, 0, 0, 1)

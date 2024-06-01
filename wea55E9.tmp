@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://gp6i1b8upr4v"]
+
+[ext_resource type="Script" path="res://weapon.gd" id="1_whuak"]
+[ext_resource type="Texture2D" uid="uid://bvycyngi7vlw0" path="res://icon.svg" id="2_d5nul"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_xsheg"]
+b = Vector2(0, 58)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mooj3"]
+radius = 119.038
+
+[sub_resource type="Animation" id="Animation_ea0li"]
+resource_name = "swing"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:swingSpeed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 300.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_iwe3y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:swingSpeed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tswpc"]
+_data = {
+"RESET": SubResource("Animation_iwe3y"),
+"swing": SubResource("Animation_ea0li")
+}
+
+[node name="weapon" type="Node2D"]
+rotation = 3.14159
+script = ExtResource("1_whuak")
+
+[node name="swordHitbox" type="Area2D" parent="."]
+position = Vector2(21.89, 0)
+rotation = -1.5708
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="swordHitbox"]
+shape = SubResource("SegmentShape2D_xsheg")
+
+[node name="SwordSprite" type="Sprite2D" parent="swordHitbox"]
+position = Vector2(0.499998, 32.5)
+scale = Vector2(0.0390625, 0.492188)
+texture = ExtResource("2_d5nul")
+
+[node name="RangeHitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeHitbox"]
+shape = SubResource("CircleShape2D_mooj3")
+
+[node name="SwingTimer" type="Timer" parent="."]
+wait_time = 0.07
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tswpc")
+}
+
+[connection signal="body_entered" from="swordHitbox" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="SwingTimer" to="." method="_on_swing_timer_timeout"]
