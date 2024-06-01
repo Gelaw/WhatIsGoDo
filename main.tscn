@@ -16,6 +16,7 @@ position = Vector2(317, 158)
 
 [node name="Player" parent="." instance=ExtResource("1_hum2p")]
 z_index = 0
+SPEED = 50000.0
 
 [node name="Spell" type="Node" parent="Player"]
 script = ExtResource("2_ttp4y")

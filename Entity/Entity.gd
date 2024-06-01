@@ -34,14 +34,13 @@ func hit():
 
 func ondeathspawn():
 	emit_signal("entity_death", self)
+
+	call_deferred("add_child_deferred")
+	queue_free()
+	pass
+
+func add_child_deferred():
 	var ent = preload("res://exp_orb.tscn").instantiate()
 	ent.global_position = global_position
 	get_parent().add_child(ent)
-	queue_free() 
-	call_deferred("_queue_free_deferred")
-	
-	pass
-
-func _queue_free_deferred():
-	queue_free()
 	pass
