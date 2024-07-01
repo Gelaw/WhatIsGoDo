@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ds6o4i5qot0h3"]
+[gd_scene load_steps=6 format=3 uid="uid://ds6o4i5qot0h3"]
 
 [ext_resource type="PackedScene" uid="uid://brq3ils7l4hqd" path="res://Entity/Player/Player.tscn" id="1_hum2p"]
 [ext_resource type="Script" path="res://Spell.gd" id="2_ttp4y"]
 [ext_resource type="Script" path="res://Spawner.gd" id="3_tlvn8"]
+[ext_resource type="PackedScene" uid="uid://jhe8whdljpr3" path="res://Entity/Dog/dog.tscn" id="4_yg18b"]
 
 [sub_resource type="Curve2D" id="Curve2D_36o3o"]
 _data = {
@@ -16,7 +17,7 @@ position = Vector2(317, 158)
 
 [node name="Player" parent="." instance=ExtResource("1_hum2p")]
 z_index = 0
-SPEED = 50000.0
+SPEED = 10000.0
 
 [node name="Spell" type="Node" parent="Player"]
 script = ExtResource("2_ttp4y")
@@ -37,6 +38,12 @@ rotation = 0.00155642
 
 [node name="Timer" type="Timer" parent="Spawner"]
 autostart = true
+
+[node name="Dog" parent="." instance=ExtResource("4_yg18b")]
+position = Vector2(163, -7)
+collision_mask = 16
+SPEED = 6000.0
+ai = true
 
 [connection signal="timeout" from="Player/Spell/CooldownTimer" to="Player/Spell" method="_on_cooldown_timer_timeout"]
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]

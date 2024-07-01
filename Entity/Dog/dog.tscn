@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://jhe8whdljpr3"]
+
+[ext_resource type="PackedScene" uid="uid://b365a65y34f6y" path="res://Entity/Entity.tscn" id="1_77xk8"]
+[ext_resource type="Script" path="res://Entity/Dog/dog.gd" id="2_6mojd"]
+[ext_resource type="Texture2D" uid="uid://bvycyngi7vlw0" path="res://icon.svg" id="3_yvkon"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_76cp5"]
+size = Vector2(422.5, 437.5)
+
+[node name="Dog" instance=ExtResource("1_77xk8")]
+z_index = 0
+script = ExtResource("2_6mojd")
+ai = false
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.8, 0.8)
+
+[node name="CollisionShape2D" parent="." index="1"]
+disabled = true
+
+[node name="pickupRange" type="Area2D" parent="." index="2"]
+modulate = Color(0.0431373, 1, 1, 1)
+show_behind_parent = true
+collision_layer = 16
+collision_mask = 16
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pickupRange" index="0"]
+position = Vector2(1.24998, 3.75002)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_76cp5")
+
+[node name="Sprite2D" type="Sprite2D" parent="pickupRange" index="1"]
+modulate = Color(1, 1, 1, 0.0235294)
+self_modulate = Color(1, 1, 1, 0.388235)
+position = Vector2(1.25, 3.75)
+scale = Vector2(3.30078, 3.41797)
+texture = ExtResource("3_yvkon")
+
+[connection signal="area_entered" from="pickupRange" to="." method="_on_pickup_range_area_entered"]

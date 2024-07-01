@@ -14,6 +14,8 @@ var isSwinging = false
 @onready var ap: AnimationPlayer = $AnimationPlayer
 @onready var anchor: Node2D = $weaponAnchor
 
+var points : Array[Vector2]
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	anchor.rotate(delta*swingSpeed)

@@ -24,7 +24,10 @@ func get_direction():
 
 func _physics_process(delta):
 	var direction = get_direction()
-	velocity = direction * SPEED * delta
+	if (not ai or abs(global_position.distance_to(target.global_position)) > 100):
+		velocity = direction * SPEED * delta
+	else:
+		velocity = Vector2(0, 0)
 	move_and_slide()
 
 func hit():

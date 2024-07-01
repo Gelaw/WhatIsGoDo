@@ -1,0 +1,25 @@
+Skeleton in cemetery setting
+Objective: survice 20min
+
+Enemies spawn continuously around the player during the run getting more dangerous as time passes
+
+defeated enemies leave drops to boost the player
+    xp (level up lets player choose a stat boost)
+    Equipment
+    Artifacts
+    Direct stat boost
+
+Stats are the usual basic rpg stats
+    strengh (Str) which provide weapon damage
+    Agility (Agi) which provide movement speed
+    Consitution (Con) which provide health
+    Intelligence (Int) which provide ?
+    Wisdom (Wis) which provide xp boost
+
+Equipment can be passive effect or active weapon
+
+player may only carry two weapons at a time
+
+Equipment is more effective with stats (better damage, range, area of effect)
+
+Equipment have a rarity (common, rare, legendary)
